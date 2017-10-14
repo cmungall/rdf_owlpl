@@ -1,0 +1,239 @@
+@prefix :  <http://www.w3.org/2002/07/owl#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:  <http://purl.org/dc/elements/1.1/> .
+
+<http://www.w3.org/2002/07/owl>
+        rdf:type         owl:Ontology ;
+        owl:versionInfo  "March 18. 2003, GS" ;
+        owl:imports      <http://www.w3.org/2000/01/rdf-schema> ;
+        dc:title         "Classes and properties for the Web Ontology Language OWL" ;
+        dc:creator       "W3C Web Ontology (WebOnt) Working Group" ;
+        dc:subject       "OWL; Web Ontology Language; Semantic Web" ;
+        dc:description   "This file specifies in RDF Schema format the\n    built-in classes and properties that together form the basis of\n    the RDF/XML syntax of OWL Full, OWL DL and OWL Lite with the help  \n    of RDF Schema. We do not expect people to import this file\n    explicitly into their ontology. People that do import this file\n    should expect their ontology to be an OWL Full ontology. \n  " ;
+        dc:publisher     "W3C" ;
+        dc:date          "2003-02-10" ;
+        dc:format        "text/xml" ;
+        dc:language      "en" ;
+        dc:identifier    "http://www.w3.org/2002/07/owl" .
+
+owl:NamedIndividual  rdf:type  owl:Class ;
+        rdfs:label       "NamedIndividual" ;
+        rdfs:subClassOf  rdfs:Class .
+
+owl:Class  rdf:type      owl:Class ;
+        rdfs:label       "Class" ;
+        rdfs:subClassOf  rdfs:Class .
+
+owl:Thing  rdf:type  owl:Class ;
+        rdfs:label  "Thing" .
+
+owl:Nothing  rdf:type  owl:Class .
+
+owl:Thing  owl:unionOf  _:b0 .
+
+_:b0    rdf:first  owl:Nothing .
+
+_:b1    rdf:type  owl:Class .
+
+_:b0    rdf:rest  _:b2 .
+
+_:b2    rdf:first  _:b1 .
+
+_:b1    owl:complementOf  owl:Nothing .
+
+_:b2    rdf:rest  rdf:nil .
+
+owl:Nothing  rdf:type     owl:Class ;
+        rdfs:label        "Nothing" ;
+        owl:complementOf  owl:Thing .
+
+owl:equivalentClass  rdf:type  rdf:Property ;
+        rdfs:label          "equivalentClass" ;
+        rdfs:subPropertyOf  rdfs:subClassOf ;
+        rdfs:domain         owl:Class ;
+        rdfs:range          owl:Class .
+
+owl:disjointWith  rdf:type  rdf:Property ;
+        rdfs:label   "disjointWith" ;
+        rdfs:domain  owl:Class ;
+        rdfs:range   owl:Class .
+
+owl:equivalentProperty
+        rdf:type            rdf:Property ;
+        rdfs:label          "equivalentProperty" ;
+        rdfs:subPropertyOf  rdfs:subPropertyOf .
+
+owl:sameIndividualAs  rdf:type  rdf:Property ;
+        rdfs:label          "sameIndividualAs" ;
+        rdfs:domain         owl:Thing ;
+        rdfs:range          owl:Thing ;
+        rdfs:subPropertyOf  owl:sameAs .
+
+owl:sameAs  rdf:type        rdf:Property ;
+        rdfs:label          "sameAs" ;
+        rdfs:subPropertyOf  owl:sameIndividualAs .
+
+owl:differentFrom  rdf:type  rdf:Property ;
+        rdfs:label   "differentFrom" ;
+        rdfs:domain  owl:Thing ;
+        rdfs:range   owl:Thing .
+
+owl:AllDifferent  rdf:type  rdfs:Class ;
+        rdfs:label  "AllDifferent" .
+
+owl:distinctMembers  rdf:type  rdf:Property ;
+        rdfs:label   "distinctMembers" ;
+        rdfs:domain  owl:AllDifferent ;
+        rdfs:range   rdf:List .
+
+owl:unionOf  rdf:type  rdf:Property ;
+        rdfs:label   "unionOf" ;
+        rdfs:domain  owl:Class ;
+        rdfs:range   rdf:List .
+
+owl:intersectionOf  rdf:type  rdf:Property ;
+        rdfs:label   "intersectionOf" ;
+        rdfs:domain  owl:Class ;
+        rdfs:range   rdf:List .
+
+owl:complementOf  rdf:type  rdf:Property ;
+        rdfs:label   "complementOf" ;
+        rdfs:domain  owl:Class ;
+        rdfs:range   owl:Class .
+
+owl:oneOf  rdf:type  rdf:Property ;
+        rdfs:label   "oneOf" ;
+        rdfs:domain  rdfs:Class ;
+        rdfs:range   rdf:List .
+
+owl:Restriction  rdf:type  rdfs:Class ;
+        rdfs:label       "Restriction" ;
+        rdfs:subClassOf  owl:Class .
+
+owl:onProperty  rdf:type  rdf:Property ;
+        rdfs:label   "onProperty" ;
+        rdfs:domain  owl:Restriction ;
+        rdfs:range   rdf:Property .
+
+owl:allValuesFrom  rdf:type  rdf:Property ;
+        rdfs:label   "allValuesFrom" ;
+        rdfs:domain  owl:Restriction ;
+        rdfs:range   rdfs:Class .
+
+owl:hasValue  rdf:type  rdf:Property ;
+        rdfs:label   "hasValue" ;
+        rdfs:domain  owl:Restriction .
+
+owl:someValuesFrom  rdf:type  rdf:Property ;
+        rdfs:label   "someValuesFrom" ;
+        rdfs:domain  owl:Restriction ;
+        rdfs:range   rdfs:Class .
+
+owl:minCardinality  rdf:type  rdf:Property ;
+        rdfs:label   "minCardinality" ;
+        rdfs:domain  owl:Restriction ;
+        rdfs:range   <http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+
+owl:maxCardinality  rdf:type  rdf:Property ;
+        rdfs:label   "maxCardinality" ;
+        rdfs:domain  owl:Restriction ;
+        rdfs:range   <http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+
+owl:cardinality  rdf:type  rdf:Property ;
+        rdfs:label   "cardinality" ;
+        rdfs:domain  owl:Restriction ;
+        rdfs:range   <http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+
+owl:ObjectProperty  rdf:type  rdfs:Class ;
+        rdfs:label       "ObjectProperty" ;
+        rdfs:subClassOf  rdf:Property .
+
+owl:DatatypeProperty  rdf:type  rdfs:Class ;
+        rdfs:label       "DatatypeProperty" ;
+        rdfs:subClassOf  rdf:Property .
+
+owl:inverseOf  rdf:type  rdf:Property ;
+        rdfs:label   "inverseOf" ;
+        rdfs:domain  owl:ObjectProperty ;
+        rdfs:range   owl:ObjectProperty .
+
+owl:TransitiveProperty
+        rdf:type         rdfs:Class ;
+        rdfs:label       "TransitiveProperty" ;
+        rdfs:subClassOf  owl:ObjectProperty .
+
+owl:SymmetricProperty
+        rdf:type         rdfs:Class ;
+        rdfs:label       "SymmetricProperty" ;
+        rdfs:subClassOf  owl:ObjectProperty .
+
+owl:FunctionalProperty
+        rdf:type         rdfs:Class ;
+        rdfs:label       "FunctionalProperty" ;
+        rdfs:subClassOf  rdf:Property .
+
+owl:InverseFunctionalProperty
+        rdf:type         rdfs:Class ;
+        rdfs:label       "InverseFunctionalProperty" ;
+        rdfs:subClassOf  owl:ObjectProperty .
+
+owl:AnnotationProperty
+        rdf:type         rdfs:Class ;
+        rdfs:subClassOf  rdf:Property .
+
+rdfs:label  rdf:type  owl:AnnotationProperty .
+
+rdfs:comment  rdf:type  owl:AnnotationProperty .
+
+rdfs:seeAlso  rdf:type  owl:AnnotationProperty .
+
+rdfs:isDefinedBy  rdf:type  owl:AnnotationProperty .
+
+owl:Ontology  rdf:type  rdfs:Class ;
+        rdfs:label  "Ontology" .
+
+owl:OntologyProperty  rdf:type  rdfs:Class ;
+        rdfs:subClassOf  rdf:Property .
+
+owl:imports  rdf:type  rdf:Property ;
+        rdfs:label   "imports" ;
+        rdf:type     owl:OntologyProperty ;
+        rdfs:domain  owl:Ontology ;
+        rdfs:range   owl:Ontology .
+
+owl:versionInfo  rdf:type  rdf:Property ;
+        rdfs:label  "versionInfo" ;
+        rdf:type    owl:AnnotationProperty .
+
+owl:priorVersion  rdf:type  rdf:Property ;
+        rdfs:label   "priorVersion" ;
+        rdf:type     owl:OntologyProperty ;
+        rdfs:domain  owl:Ontology ;
+        rdfs:range   owl:Ontology .
+
+owl:backwardCompatibleWith
+        rdf:type     rdf:Property ;
+        rdfs:label   "backwardCompatibleWitesh" ;
+        rdf:type     owl:OntologyProperty ;
+        rdfs:domain  owl:Ontology ;
+        rdfs:range   owl:Ontology .
+
+owl:incompatibleWith  rdf:type  rdf:Property ;
+        rdfs:label   "incompatibleWith" ;
+        rdf:type     owl:OntologyProperty ;
+        rdfs:domain  owl:Ontology ;
+        rdfs:range   owl:Ontology .
+
+owl:DeprecatedClass  rdf:type  rdfs:Class ;
+        rdfs:label       "DeprecatedClass" ;
+        rdfs:subClassOf  rdfs:Class .
+
+owl:DeprecatedProperty
+        rdf:type         rdfs:Class ;
+        rdfs:label       "DeprecatedProperty" ;
+        rdfs:subClassOf  rdf:Property .
+
+owl:DataRange  rdf:type  rdfs:Class ;
+        rdfs:label  "DataRange" .
